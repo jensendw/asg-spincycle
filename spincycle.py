@@ -58,12 +58,18 @@ def all_asg_instances_healthy(asg_name):
             return False
     return True
 
+
 def rotate_asg(asg_name):
     """Main function that facilitates rotating instances in the ASG"""
 
     asg_object = get_autoscaling_group(asg_name)
     instances = get_old_asg_instances(asg_object)
     LOGGER.info("Found %s instances that have old launch configuration", len(instances))
+
+    #exit if there are no instances to rotate
+    if not instances:
+        sys.exit(0)
+
     for instance_id in instances:
         if not all_asg_instances_healthy(asg_name):
             LOGGER.error("All instances in ASG are not healthy, exiting")
