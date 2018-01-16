@@ -77,7 +77,7 @@ def rotate_asg(asg_name):
 
 PARSER = argparse.ArgumentParser(description='Rotate old instances from an ASG')
 PARSER.add_argument('--asg-name', '-a', dest='asg_name', required=True, help='The name of the ASG you want to rotate')
-PARSER.add_argument('--sleep-time', '-s', dest='sleep_time', required=False, default=600, help="The time you want to wait between rotating instances (default 600)")
+PARSER.add_argument('--sleep-time', '-s', dest='sleep_time', type=int, required=False, default=600, help="The time you want to wait between rotating instances (default 600)")
 
 
 ARGS = PARSER.parse_args()
