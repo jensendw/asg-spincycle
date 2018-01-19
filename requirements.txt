@@ -1,3 +1,4 @@
 boto3==1.5.12
 mock==2.0.0
 requests==2.18.4
+nanotime==0.5.2

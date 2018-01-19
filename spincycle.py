@@ -79,7 +79,15 @@ def rotate_asg(asg_name):
                     instance_id, ARGS.sleep_time)
         time.sleep(ARGS.sleep_time)
 
-
+def get_instance_ip(instance_id):
+    """Gets ip address from a given instance id
+    it will return the public ip if the instnace has one
+    otherwise it returns the private ip"""
+    client = ec2_connection()
+    instance = client.Instance(instance_id)
+    if instance.public_ip_address is not None:
+        return instance.public_ip_address
+    return instance.private_ip_address
 
 PARSER = argparse.ArgumentParser(description='Rotate old instances from an ASG')
 PARSER.add_argument('--asg-name', '-a', dest='asg_name', required=True, help='The name of the ASG you want to rotate')
